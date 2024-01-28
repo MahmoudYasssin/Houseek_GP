@@ -16,7 +16,7 @@ public interface ApartmentRepository extends JpaRepository<Apartment, Long> {
 
 
 
-    @Query("SELECT new com.fci.cu.houseek.dto.AppartmentDto( a.id,  a.price, a.propertyType, a.location,a.bedrooms, a.bathrooms, a.area, a.title, a.description, a.status,a.images) " +
+    @Query("SELECT new com.fci.cu.houseek.dto.AppartmentDto(a) " +
             "FROM Apartment a " +
             "WHERE a.area = :area " +
             "AND a.bathrooms = :bathrooms " +
