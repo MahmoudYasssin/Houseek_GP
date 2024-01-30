@@ -160,9 +160,9 @@ public class ApartmentServiceImplementation implements ApartmentService {
 
 
         @Override
-    public List<AppartmentDto> Search(float area,int bathrooms,int bedrooms,float minPrice,float maxPrice,String propertyType)
+    public List<AppartmentDto> Search(String location,float area,int bathrooms,int bedrooms,float minPrice,float maxPrice,String propertyType)
     {
-        return apartmentRepository.search(area,bathrooms,bedrooms,minPrice,maxPrice,propertyType);
+        return apartmentRepository.search(location,area,bathrooms,bedrooms,minPrice,maxPrice,propertyType);
     }
 
 
@@ -215,7 +215,7 @@ public class ApartmentServiceImplementation implements ApartmentService {
     }
 
     //set user_id ----> apartment_id
-    public void favouriteList(long userId,long apartmentId)
+    public void addToFavouriteList(long userId,long apartmentId)
     {
         FavouriteList favouriteList=new FavouriteList();
         favouriteList.setApartmentId(apartmentId);
@@ -244,6 +244,12 @@ public class ApartmentServiceImplementation implements ApartmentService {
         return AllFavouriteApartment;
 
 
+    }
+   public void removeFromFavouriteList(long userId,long apartmentId)
+    {
+       FavouriteList favouriteList= favouriteListRepository.removeFavouriteListByAU(userId,apartmentId);
+       long favouriteListId=favouriteList.getId();
+        favouriteListRepository.deleteById(favouriteListId);
     }
 
 

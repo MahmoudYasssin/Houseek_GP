@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
+//localhost7070/apartment/sell/save
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
@@ -39,13 +39,14 @@ public class ApartmentController {
             @RequestParam("area") float area,
             @RequestParam("bedrooms") int bedrooms,
             @RequestParam("bathrooms") int bathrooms,
-            @RequestParam("propertyType") String propertyType,
-            @RequestParam("status") String status)
+            @RequestParam("propertyType") String propertyType
+
+    )
 
     {
 
         try {
-            Apartment newApartment = buildApartment(title, price, description, location, area, bedrooms, bathrooms, propertyType, images,proofImages,status);
+            Apartment newApartment = buildApartment(title, price, description, location, area, bedrooms, bathrooms, propertyType, images,proofImages);
             Apartment savedApartment = apartmentService.saveApartment(newApartment);
             return ResponseEntity.ok(savedApartment);
         } catch (IOException e) {
@@ -68,7 +69,7 @@ public class ApartmentController {
     private Apartment buildApartment(
             String title, float price, String description, String location,
             float area, int bedrooms, int bathrooms, String propertyType,
-            List<MultipartFile> images,List<MultipartFile> proofImages,String status) throws IOException {
+            List<MultipartFile> images,List<MultipartFile> proofImages) throws IOException {
 
         Apartment newApartment = new Apartment();
         newApartment.setTitle(title);
@@ -79,7 +80,7 @@ public class ApartmentController {
         newApartment.setBedrooms(bedrooms);
         newApartment.setBathrooms(bathrooms);
         newApartment.setPropertyType(propertyType);
-        newApartment.setStatus(status);
+        newApartment.setStatus("pending");
 
 
         List<ApartmentImages> uploadedImageUrls = new ArrayList<ApartmentImages>();
@@ -111,9 +112,9 @@ public class ApartmentController {
     }
 
    @GetMapping("/search")
-   public List<AppartmentDto> search( @RequestParam("area") float area,@RequestParam("bathrooms") int bathrooms,@RequestParam("bedrooms") int bedrooms,@RequestParam("minPrice") float minPrice,@RequestParam("maxPrice") int maxPrice,@RequestParam("propertyType") String propertyType)
+   public List<AppartmentDto> search( @RequestParam("location") String location,@RequestParam("area") float area,@RequestParam("bathrooms") int bathrooms,@RequestParam("bedrooms") int bedrooms,@RequestParam("minPrice") float minPrice,@RequestParam("maxPrice") int maxPrice,@RequestParam("propertyType") String propertyType)
     {
-       return apartmentService.Search(area,bathrooms,bedrooms,minPrice,maxPrice,propertyType);
+       return apartmentService.Search(location,area,bathrooms,bedrooms,minPrice,maxPrice,propertyType);
     }
 
     @GetMapping("/approval")
@@ -123,21 +124,27 @@ public class ApartmentController {
     }
 
     @GetMapping("/FavouriteList")
-    public void FavouriteList(@RequestParam("userId") Long userId,@RequestParam("apartmentId") long apartmentId)
+    public void addToFavouriteList(@RequestParam("userId") Long userId,@RequestParam("apartmentId") long apartmentId)
     {
-        apartmentService.favouriteList(userId,apartmentId);
+        apartmentService.addToFavouriteList(userId,apartmentId);
     }
 
-    @GetMapping("/sellectAllfavourite")
-    public void sellectAllfavourite(@RequestParam("userId") Long userId)
+   /* @GetMapping("/sellectAllfavourite")
+    public List<AppartmentDto> sellectAllfavourite(@RequestParam("userId") Long userId)
     {
-        apartmentService.sellectAllfavourite(userId);
-    }
+        return  apartmentService.sellectAllfavourite(userId);
+    }*/
 
     @GetMapping("/sellectAllfavouriteApartment")
     public List<AppartmentDto> sellectAllfavouriteApartment(@RequestParam("userId") Long userId)
     {
-        return  apartmentService.sellectAllfavourite(userId);
+        return apartmentService.sellectAllfavourite(userId);
+    }
+
+    @GetMapping("/removeFromFavouriteList")
+    public void removeFromFavouriteList(@RequestParam("userId") Long userId,@RequestParam("apartmentId") Long apartmentId)
+    {
+         apartmentService.removeFromFavouriteList(userId,apartmentId);
     }
 
 

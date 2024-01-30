@@ -19,12 +19,15 @@ public interface ApartmentRepository extends JpaRepository<Apartment, Long> {
     @Query("SELECT new com.fci.cu.houseek.dto.AppartmentDto(a) " +
             "FROM Apartment a " +
             "WHERE a.area = :area " +
+            "AND a.location = :location "+
             "AND a.bathrooms = :bathrooms " +
             "AND a.bedrooms = :bedrooms " +
             "AND a.price > :minPrice " +
             "AND a.price < :maxPrice " +
             "AND a.propertyType = :propertyType")
-    List<AppartmentDto> search(@Param("area") float area,
+    List<AppartmentDto> search(
+                                @Param("location") String location,
+                                @Param("area") float area,
                                @Param("bathrooms") int bathrooms,
                                @Param("bedrooms") int bedrooms,
                                @Param("minPrice") float minPrice,

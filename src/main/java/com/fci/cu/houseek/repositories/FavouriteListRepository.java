@@ -15,8 +15,13 @@ public interface FavouriteListRepository extends JpaRepository<FavouriteList, Lo
     @Query("SELECT u FROM FavouriteList u WHERE u.userId= :userId")
     List<FavouriteList>  SellectAllfavourite(long userId);
 
-    @Query("SELECT new com.fci.cu.houseek.dto.AppartmentDto(a.id, a.price, a.propertyType, a.location, a.bedrooms, a.bathrooms, a.area, a.title, a.description,a.status) FROM Apartment a WHERE a.id= :apartmentId")
+    @Query("SELECT new com.fci.cu.houseek.dto.AppartmentDto(a) FROM Apartment a WHERE a.id= :apartmentId")
     AppartmentDto SellectAllfavouriteApartment(long apartmentId);
+
+
+    @Query("SELECT u FROM FavouriteList u WHERE u.userId= :userId AND u.apartmentId= :apartmentId")
+    FavouriteList removeFavouriteListByAU(long userId,long apartmentId);
+
 
 
 }

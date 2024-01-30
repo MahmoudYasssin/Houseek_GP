@@ -12,11 +12,12 @@ public interface ApartmentService {
 
     List<AppartmentDto> selectSpecifiedStatus(String status);
 
-    List<AppartmentDto> Search(float area,int bathrooms,int bedrooms,float minPrice,float maxPrice,String propertyType);
+    List<AppartmentDto> Search(String location,float area,int bathrooms,int bedrooms,float minPrice,float maxPrice,String propertyType);
 
     AppartmentDto editStatus(Long id,String status);
 
-     void favouriteList(long userId,long apartmentId);
+     void addToFavouriteList(long userId,long apartmentId);
+     void removeFromFavouriteList(long userId,long apartmentId);
 
     List<AppartmentDto> sellectAllfavourite(long userId);
 
