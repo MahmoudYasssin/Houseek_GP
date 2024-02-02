@@ -11,9 +11,17 @@ import org.springframework.stereotype.Service;
 public class UserServiceImplementation implements UserService {
     private final UserRepository userRepository;
     @Override
-    public User signUp(User users)
+    public void signUp(User users)
     {
-            return userRepository.save(users);
+           // return userRepository.save(users);
+            String userName=users.getUserName();
+            User user=new User();
+            user=userRepository.findUserByUsername(userName);
+            if(user==null)
+            {
+                 userRepository.save(users);
+            }
+
 
     }
     @Override

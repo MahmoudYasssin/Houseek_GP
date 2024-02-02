@@ -13,11 +13,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "firstName",nullable = false)
-    private String firstName;
-
-    @Column(name = "lastName",nullable = false)
-    private String lastName;
+    @Column(name = "name",nullable = false)
+    private String name;
 
     @Column(name = "email",nullable = false)
     private String email;
@@ -28,8 +25,6 @@ public class User {
     @Column(name = "password",nullable = false)
     private String password;
 
-   // @Column(name = "confirmPassword",nullable = false)
-   // private String confirmPassword;
 
     @Column(name = "phone",nullable = false)
     private String phone;
@@ -37,6 +32,14 @@ public class User {
     //map one user to many apartment
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Apartment>userApartment;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Authority> authorities;
+
+    public List<Authority> getAuthorities() {
+        return authorities;
+    }
+    private String role;
 
 
 

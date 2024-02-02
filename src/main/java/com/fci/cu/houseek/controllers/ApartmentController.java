@@ -23,9 +23,8 @@ import java.util.List;
 //localhost7070/apartment/sell/save
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin
 @RequestMapping("/apartment/sell")
-
+@CrossOrigin(origins = "http://localhost:3000")
 public class ApartmentController {
     private final ApartmentService apartmentService;
     @PostMapping("/save")
@@ -111,8 +110,15 @@ public class ApartmentController {
         return newApartment;
     }
 
-   @GetMapping("/search")
-   public List<AppartmentDto> search( @RequestParam("location") String location,@RequestParam("area") float area,@RequestParam("bathrooms") int bathrooms,@RequestParam("bedrooms") int bedrooms,@RequestParam("minPrice") float minPrice,@RequestParam("maxPrice") int maxPrice,@RequestParam("propertyType") String propertyType)
+   @PostMapping ("/search")
+   public List<AppartmentDto> search(
+                                       @RequestParam("location") String location,
+                                       @RequestParam("area") float area,
+                                      @RequestParam("bathrooms") int bathrooms,
+                                      @RequestParam("bedrooms") int bedrooms,
+                                      @RequestParam("minPrice") float minPrice,
+                                      @RequestParam("maxPrice") int maxPrice,
+                                      @RequestParam("propertyType") String propertyType)
     {
        return apartmentService.Search(location,area,bathrooms,bedrooms,minPrice,maxPrice,propertyType);
     }
