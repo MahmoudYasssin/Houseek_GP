@@ -1,3 +1,4 @@
+/*
 package com.fci.cu.houseek.configuration;
 
 import com.fci.cu.houseek.filters.JWTTokenGeneratorFilter;
@@ -30,11 +31,10 @@ public class AppConfiguration {
                 .addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests(
                         authorize -> authorize
-                                .requestMatchers("/apartment/sell/save").authenticated()
-                                .requestMatchers("/apartment/sell/selectAll").authenticated()
-                                .requestMatchers("/apartment/sell/search").authenticated()
-                                //.requestMatchers("/User/signUp").permitAll()
-                                .requestMatchers("/login").authenticated()
+                                .requestMatchers("/apartment/sell/save").permitAll()
+                                .requestMatchers("/apartment/sell/selectAll").permitAll()
+                                .requestMatchers("/apartment/sell/search").permitAll()
+                                .requestMatchers("/login").permitAll()
                                 .requestMatchers("/signup").permitAll())
                 .formLogin(withDefaults())
                 .httpBasic(Customizer.withDefaults());
@@ -44,14 +44,14 @@ public class AppConfiguration {
         //           .csrf((a) -> a.disable());
 
 
-       // return http.build();
+        // return http.build();
     }
 
 
-        @Bean
-        public PasswordEncoder passwordEncoder() {
-            return new BCryptPasswordEncoder();
-        }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
+}
 
-
+*/

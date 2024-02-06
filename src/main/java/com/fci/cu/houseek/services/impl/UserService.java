@@ -1,13 +1,4 @@
-package com.fci.cu.houseek.services.impl;
-
-import com.fci.cu.houseek.dto.CredentialsDto;
-import com.fci.cu.houseek.dto.SignUpDto;
-import com.fci.cu.houseek.dto.UserDto;
-import com.fci.cu.houseek.models.User;
-import com.fci.cu.houseek.repositories.UserRepository;
-import com.fci.cu.houseek.services.interfaces.UserService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+/*package com.fci.cu.houseek.services.impl;
 
 
 import com.fci.cu.houseek.dto.CredentialsDto;
@@ -25,16 +16,13 @@ import org.springframework.stereotype.Service;
 import java.nio.CharBuffer;
 import java.util.Optional;
 
-
-
-
-@Service
 @RequiredArgsConstructor
-public class UserServiceImplementation implements UserService {
+@Service
+public class UserService {
 
+    private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
 
     private final UserMapper userMapper;
 
@@ -68,4 +56,6 @@ public class UserServiceImplementation implements UserService {
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
         return userMapper.toUserDto(user);
     }
+
 }
+*/

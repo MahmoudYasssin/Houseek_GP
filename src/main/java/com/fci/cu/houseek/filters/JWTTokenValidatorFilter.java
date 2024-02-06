@@ -1,3 +1,4 @@
+/*
 package com.fci.cu.houseek.filters;
 
 import com.fci.cu.houseek.constants.SecurityConstants;
@@ -60,3 +61,5 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
     }
 
 }
+
+ */

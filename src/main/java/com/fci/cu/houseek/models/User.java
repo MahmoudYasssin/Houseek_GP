@@ -33,13 +33,22 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Apartment>userApartment;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+
+
+
+
+
+
+
+
+
+    /*@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Authority> authorities;
 
     public List<Authority> getAuthorities() {
         return authorities;
     }
-    private String role;
+    private String role;*/
 
 
 

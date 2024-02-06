@@ -1,3 +1,4 @@
+/*
 package com.fci.cu.houseek.models;
 
 import jakarta.persistence.*;
@@ -40,3 +41,5 @@ public class Authority {
         this.user = user;
     }
 }
+
+ */
