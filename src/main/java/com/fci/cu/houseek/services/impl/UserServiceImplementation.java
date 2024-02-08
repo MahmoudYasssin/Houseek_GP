@@ -4,6 +4,7 @@ import com.fci.cu.houseek.dto.CredentialsDto;
 import com.fci.cu.houseek.dto.SignUpDto;
 import com.fci.cu.houseek.dto.UserDto;
 import com.fci.cu.houseek.models.User;
+//import com.fci.cu.houseek.models.UserImage;
 import com.fci.cu.houseek.repositories.UserRepository;
 import com.fci.cu.houseek.services.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
@@ -68,4 +69,12 @@ public class UserServiceImplementation implements UserService {
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
         return userMapper.toUserDto(user);
     }
+
+   /* @Override
+    public User editUserData(User user) {
+
+        return userRepository.save(user);
+    }*/
+
+
 }

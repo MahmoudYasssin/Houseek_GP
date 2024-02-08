@@ -29,9 +29,15 @@ public class SecurityConfig {
                 .and()
                 .addFilterBefore(new JwtAuthFilter(userAuthenticationProvider), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/print").authenticated()
-                      //  .requestMatchers("/apartment/sell/selectAll").permitAll()
-                      //  .requestMatchers("/apartment/sell/search").permitAll()
+                       // .requestMatchers("/print").authenticated()
+                        .requestMatchers("/apartment/sell/save").authenticated()
+                        .requestMatchers("/apartment/sell/FavouriteList").authenticated()
+                        .requestMatchers("/apartment/sell/sellectAllfavouriteApartment").authenticated()
+                        .requestMatchers("/apartment/sell/howManyApartmentExistInFav").authenticated()
+                        .requestMatchers("/apartment/sell/numOfApartmentViews").authenticated()
+                        .requestMatchers("/apartment/sell/search").permitAll()
+                        .requestMatchers("/apartment/sell/selectAll").permitAll()
+                        .requestMatchers("/edit").authenticated()
                         .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
                       //  .requestMatchers(HttpMethod.GET, "/print", "").authenticated()
 

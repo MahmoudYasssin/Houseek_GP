@@ -4,6 +4,7 @@ import com.fci.cu.houseek.dto.CredentialsDto;
 import com.fci.cu.houseek.dto.SignUpDto;
 import com.fci.cu.houseek.dto.UserDto;
 import com.fci.cu.houseek.models.User;
+//import com.fci.cu.houseek.models.UserImage;
 
 public interface UserService {
 
@@ -15,6 +16,10 @@ public interface UserService {
     UserDto register(SignUpDto userDto);
 
     UserDto login(CredentialsDto credentialsDto);
+
+    UserDto findByLogin(String login);
+
+   // User editUserData(User user);
 
 
 }

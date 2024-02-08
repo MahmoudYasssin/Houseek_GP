@@ -2,13 +2,15 @@ package com.fci.cu.houseek.models;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Setter;
+import lombok.*;
 
-@Data
+
 @Entity
 @Table(name = "ProofOfOwnershipImages")
 @Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProofOfApartmentOwnership {
 
     @Id

@@ -1,4 +1,4 @@
-/*package com.fci.cu.houseek.configuration;
+package com.fci.cu.houseek.config;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -26,4 +26,3 @@ public class FirebaseConfig {
     }
 }
 
- */

@@ -23,5 +23,9 @@ public interface FavouriteListRepository extends JpaRepository<FavouriteList, Lo
     FavouriteList removeFavouriteListByAU(long userId,long apartmentId);
 
 
+    @Query("SELECT u FROM FavouriteList u WHERE u.apartmentId= :apartmentId")
+   List<FavouriteList>howManyApartmentExist(long apartmentId);
+
+
 
 }

@@ -44,6 +44,7 @@ public class ApartmentController {
 
     {
 
+
         try {
             Apartment newApartment = buildApartment(title, price, description, location, area, bedrooms, bathrooms, propertyType, images,proofImages);
             Apartment savedApartment = apartmentService.saveApartment(newApartment);
@@ -129,7 +130,7 @@ public class ApartmentController {
         return apartmentService.editStatus(id,status);
     }
 
-    @GetMapping("/FavouriteList")
+    @PostMapping ("/FavouriteList")
     public void addToFavouriteList(@RequestParam("userId") Long userId,@RequestParam("apartmentId") long apartmentId)
     {
         apartmentService.addToFavouriteList(userId,apartmentId);
@@ -147,11 +148,25 @@ public class ApartmentController {
         return apartmentService.sellectAllfavourite(userId);
     }
 
-    @GetMapping("/removeFromFavouriteList")
+    @PostMapping ("/removeFromFavouriteList")
     public void removeFromFavouriteList(@RequestParam("userId") Long userId,@RequestParam("apartmentId") Long apartmentId)
     {
          apartmentService.removeFromFavouriteList(userId,apartmentId);
     }
+
+    @GetMapping ("/howManyApartmentExistInFav")
+    public long howManyApartmentExist(@RequestParam("apartmentId") Long apartmentId)
+    {
+      return   apartmentService.HowManyApartmentExist(apartmentId);
+    }
+
+    @GetMapping ("/numOfApartmentViews")
+    public long numOfApartmentViews(@RequestParam("userId") Long userId,@RequestParam("apartmentId") Long apartmentId)
+    {
+        return apartmentService.numOfApartmentViews(userId,apartmentId);
+    }
+
+
 
 
 

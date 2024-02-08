@@ -3,6 +3,7 @@ package com.fci.cu.houseek.repositories;
 import com.fci.cu.houseek.dto.ApartmentImageDto;
 import com.fci.cu.houseek.dto.AppartmentDto;
 import com.fci.cu.houseek.models.Apartment;
+import com.fci.cu.houseek.models.FavouriteList;
 import com.fci.cu.houseek.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -37,6 +38,15 @@ public interface ApartmentRepository extends JpaRepository<Apartment, Long> {
 
     @Query("SELECT u FROM Apartment u WHERE u.status = :status")
     List<AppartmentDto> SelectSpecifiedStatus(@Param("status") String status);
+
+
+
+    @Query("SELECT u FROM FavouriteList u WHERE u.userId = :userId AND u.apartmentId= :apartmentId")
+    List<FavouriteList> apartmentIfExistInFav(@Param("userId") long userId, long apartmentId);
+
+
+
+
 
 }
 

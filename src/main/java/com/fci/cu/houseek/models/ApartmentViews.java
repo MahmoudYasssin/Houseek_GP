@@ -1,21 +1,16 @@
 package com.fci.cu.houseek.models;
 
-
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
-
+@Data
 @Entity
-@Table(name = "FavouriteList")
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-public class FavouriteList {
+@Table(name="ApartmentViews")
+public class ApartmentViews {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private long id;
 
     @Column(name = "userId", nullable = false)
     private long userId;
@@ -25,4 +20,8 @@ public class FavouriteList {
     private long apartmentId;
 
 
+
+
 }
+
+

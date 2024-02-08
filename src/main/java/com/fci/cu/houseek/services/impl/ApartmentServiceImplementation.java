@@ -2,14 +2,8 @@ package com.fci.cu.houseek.services.impl;
 
 import com.fci.cu.houseek.dto.ApartmentImageDto;
 import com.fci.cu.houseek.dto.AppartmentDto;
-import com.fci.cu.houseek.models.Apartment;
-import com.fci.cu.houseek.models.ApartmentImages;
-import com.fci.cu.houseek.models.FavouriteList;
-import com.fci.cu.houseek.models.ProofOfApartmentOwnership;
-import com.fci.cu.houseek.repositories.ApartmentImagesRepository;
-import com.fci.cu.houseek.repositories.ApartmentRepository;
-import com.fci.cu.houseek.repositories.FavouriteListRepository;
-import com.fci.cu.houseek.repositories.ProofOfApartmentOwnershipRepository;
+import com.fci.cu.houseek.models.*;
+import com.fci.cu.houseek.repositories.*;
 import com.fci.cu.houseek.services.interfaces.ApartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +22,7 @@ public class ApartmentServiceImplementation implements ApartmentService {
     private final ApartmentImagesRepository apartmentImagesRepository;
     private final ProofOfApartmentOwnershipRepository proofOfApartmentOwnershipRepository;
     private final FavouriteListRepository favouriteListRepository;
+    private final ApartmentViewsRepository apartmentViewsRepository;
 
 
     public AppartmentDto convertApartmentToApartmentDto(Apartment apartment)
@@ -95,9 +90,9 @@ public class ApartmentServiceImplementation implements ApartmentService {
 
 //        apartmentImagesRepository.saveAll(images);
 
-        System.out.println(images.size());
+     //   System.out.println(images.size());
 
-        System.out.println(images);
+    //    System.out.println(images);
 
         // Save the updated ApartmentImages list
 //        apartmentImagesRepository.saveAll(images);
@@ -217,11 +212,17 @@ public class ApartmentServiceImplementation implements ApartmentService {
     //set user_id ----> apartment_id
     public void addToFavouriteList(long userId,long apartmentId)
     {
-        FavouriteList favouriteList=new FavouriteList();
-        favouriteList.setApartmentId(apartmentId);
-        favouriteList.setUserId(userId);
+        List<FavouriteList> favouriteList=new ArrayList<>();
+        FavouriteList f=new FavouriteList();
+        favouriteList=apartmentRepository.apartmentIfExistInFav(userId,apartmentId);
 
-        favouriteListRepository.save(favouriteList);
+        if(favouriteList.isEmpty())
+        {
+            f.setApartmentId(apartmentId);
+            f.setUserId(userId);
+            favouriteListRepository.save(f);
+        }
+
     }
 
     //get
@@ -251,6 +252,34 @@ public class ApartmentServiceImplementation implements ApartmentService {
        long favouriteListId=favouriteList.getId();
         favouriteListRepository.deleteById(favouriteListId);
     }
+
+    public long HowManyApartmentExist(long apartmentId) {
+        List<FavouriteList> userFavouriteApartment = favouriteListRepository.howManyApartmentExist(apartmentId);
+        long num = userFavouriteApartment.size();
+        return num;
+
+    }
+
+    @Override
+    public long numOfApartmentViews(long userId, long apartmentId)
+    {
+        List<ApartmentViews>apartmentViews1=apartmentViewsRepository.findAll();
+        ApartmentViews apartmentViews=apartmentViewsRepository.checkViewsAndSave(userId,apartmentId);
+
+        if(apartmentViews1.isEmpty() || apartmentViews==null)
+        {
+            ApartmentViews apartmentViews2=new ApartmentViews();
+            apartmentViews2.setApartmentId(apartmentId);
+            apartmentViews2.setUserId(userId);
+            apartmentViewsRepository.save(apartmentViews2);
+        }
+
+
+        List<ApartmentViews>apartmentViews3=apartmentViewsRepository.NumOfViews(apartmentId);
+        return apartmentViews3.size();
+
+    }
+
 
 
 

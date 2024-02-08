@@ -18,5 +18,6 @@ public class UserDto {
     private String userName;
     private String phone;
     private String token;
+    private String Image=null;
 
 }

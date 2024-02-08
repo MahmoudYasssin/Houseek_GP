@@ -23,6 +23,10 @@ public interface ApartmentService {
 
     AppartmentDto convertApartmentToApartmentDto(Apartment apartment);
 
+    long HowManyApartmentExist(long apartmentId);
+
+    long numOfApartmentViews(long userId,long apartmentId);
+
 
 
 }

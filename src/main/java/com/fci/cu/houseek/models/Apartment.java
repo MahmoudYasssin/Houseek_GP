@@ -1,13 +1,17 @@
 package com.fci.cu.houseek.models;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
-@Data
+
 @Entity
 @Table(name = "apartments")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Apartment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +43,8 @@ public class Apartment {
 
    @Column(name = "status", nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'pending'")
    private String status;
+
+
 
 
 

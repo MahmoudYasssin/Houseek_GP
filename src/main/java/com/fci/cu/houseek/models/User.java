@@ -34,6 +34,13 @@ public class User {
     private List<Apartment>userApartment;
 
 
+//    @OneToOne(mappedBy = "user",  orphanRemoval = true)
+//    private UserImage image;
+
+
+    @Column(name = "userImage",nullable = true)
+    private String userImage;
+
 
 
 

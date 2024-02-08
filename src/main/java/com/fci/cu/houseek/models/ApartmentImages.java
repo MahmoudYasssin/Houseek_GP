@@ -2,13 +2,14 @@ package com.fci.cu.houseek.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
-@Data
 @Entity
 @Table(name = "ApartmentImages")
 @Setter
+@Getter
 public class ApartmentImages {
 
     @Id
