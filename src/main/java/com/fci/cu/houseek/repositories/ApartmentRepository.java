@@ -41,7 +41,13 @@ public interface ApartmentRepository extends JpaRepository<Apartment, Long> {
 
 
 
-    @Query("SELECT u FROM FavouriteList u WHERE u.userId = :userId AND u.apartmentId= :apartmentId")
+    @Query("SELECT u FROM Apartment u WHERE u.userId = :userId")
+    List<AppartmentDto> selectUserApartments(@Param("userId") long userId);
+
+
+
+
+    @Query("SELECT u FROM FavouriteList u WHERE u.vistorId = :userId AND u.apartmentId= :apartmentId")
     List<FavouriteList> apartmentIfExistInFav(@Param("userId") long userId, long apartmentId);
 
 

@@ -41,8 +41,12 @@ public class Apartment {
     @Column(name = "description", nullable = false)
     private String description;
 
-   @Column(name = "status", nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'pending'")
-   private String status;
+    @Column(name = "userId", nullable = false)
+    private long userId;
+
+
+    @Column(name = "status", nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'pending'")
+    private String status;
 
 
 
@@ -55,9 +59,9 @@ public class Apartment {
     private List<ProofOfApartmentOwnership> imagesProof;
 
    //map many apartment to one user
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "user_id")  // This is the foreign key in the apartments table
-    private User user;
+    private User user;*/
 
 
 }

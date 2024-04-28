@@ -4,6 +4,7 @@ import com.fci.cu.houseek.dto.AppartmentDto;
 import com.fci.cu.houseek.models.Apartment;
 import com.fci.cu.houseek.models.ApartmentImages;
 import com.fci.cu.houseek.models.ProofOfApartmentOwnership;
+import com.fci.cu.houseek.models.User;
 import com.fci.cu.houseek.services.FirebaseStorageService;
 import com.fci.cu.houseek.services.interfaces.ApartmentService;
 import lombok.RequiredArgsConstructor;
@@ -38,18 +39,22 @@ public class ApartmentController {
             @RequestParam("area") float area,
             @RequestParam("bedrooms") int bedrooms,
             @RequestParam("bathrooms") int bathrooms,
-            @RequestParam("propertyType") String propertyType
+            @RequestParam("propertyType") String propertyType,
+            @RequestParam("user_id") long user_id
 
     )
 
     {
 
 
-        try {
-            Apartment newApartment = buildApartment(title, price, description, location, area, bedrooms, bathrooms, propertyType, images,proofImages);
+        try
+        {
+            Apartment newApartment = buildApartment(title, price, description, location, area, bedrooms, bathrooms, propertyType, images,proofImages,user_id);
             Apartment savedApartment = apartmentService.saveApartment(newApartment);
             return ResponseEntity.ok(savedApartment);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving apartment");
         }
@@ -69,7 +74,7 @@ public class ApartmentController {
     private Apartment buildApartment(
             String title, float price, String description, String location,
             float area, int bedrooms, int bathrooms, String propertyType,
-            List<MultipartFile> images,List<MultipartFile> proofImages) throws IOException {
+            List<MultipartFile> images,List<MultipartFile> proofImages,long user_id) throws IOException {
 
         Apartment newApartment = new Apartment();
         newApartment.setTitle(title);
@@ -80,6 +85,7 @@ public class ApartmentController {
         newApartment.setBedrooms(bedrooms);
         newApartment.setBathrooms(bathrooms);
         newApartment.setPropertyType(propertyType);
+        newApartment.setUserId(user_id);
         newApartment.setStatus("pending");
 
 
@@ -104,6 +110,9 @@ public class ApartmentController {
                 uploadedProofImageUrls.add(newImage);
             }
         }
+        //User user=new User();
+        //user.setId(user_id);
+       // newApartment.setUser(user);
 
         newApartment.setImages(uploadedImageUrls);
         newApartment.setImagesProof(uploadedProofImageUrls);
@@ -164,6 +173,13 @@ public class ApartmentController {
     public long numOfApartmentViews(@RequestParam("userId") Long userId,@RequestParam("apartmentId") Long apartmentId)
     {
         return apartmentService.numOfApartmentViews(userId,apartmentId);
+    }
+
+    //edit status
+    @PostMapping("/editApartmentStatus")
+    public void editApartmentStatus(@RequestParam("apartmentId")Long apartmentId,@RequestParam("newStatus") String newStatus)
+    {
+        apartmentService.editStatus(apartmentId,newStatus);
     }
 
 

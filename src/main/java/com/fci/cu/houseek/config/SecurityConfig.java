@@ -31,15 +31,23 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                        // .requestMatchers("/print").authenticated()
                         .requestMatchers("/apartment/sell/save").authenticated()
-                        .requestMatchers("/apartment/sell/FavouriteList").authenticated()
+                        .requestMatchers("/apartment/sell/FavouriteList").permitAll()
                         .requestMatchers("/apartment/sell/sellectAllfavouriteApartment").authenticated()
                         .requestMatchers("/apartment/sell/howManyApartmentExistInFav").authenticated()
-                        .requestMatchers("/apartment/sell/numOfApartmentViews").authenticated()
+                        .requestMatchers("/apartment/sell/numOfApartmentViews").permitAll()
+                        .requestMatchers("/apartment/sell/editApartmentStatus").permitAll()
+                        .requestMatchers("/userApartments").authenticated()
                         .requestMatchers("/apartment/sell/search").permitAll()
                         .requestMatchers("/apartment/sell/selectAll").permitAll()
                         .requestMatchers("/edit").authenticated()
                         .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
                       //  .requestMatchers(HttpMethod.GET, "/print", "").authenticated()
+
+                        .requestMatchers("/dashboard/sendMessage").permitAll()
+                       .requestMatchers("/dashboard/showMessages").permitAll()
+                       .requestMatchers("/dashboard/showWhoAddMyApartmentToFavList").permitAll()
+                       .requestMatchers("/dashboard/showWhoMyApartment").permitAll()
+
 
                         .anyRequest().authenticated())
         ;

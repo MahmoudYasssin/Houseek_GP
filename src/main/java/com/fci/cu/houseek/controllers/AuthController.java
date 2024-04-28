@@ -2,15 +2,14 @@ package com.fci.cu.houseek.controllers;
 
 
 import com.fci.cu.houseek.config.UserAuthenticationProvider;
+import com.fci.cu.houseek.dto.AppartmentDto;
 import com.fci.cu.houseek.dto.CredentialsDto;
 import com.fci.cu.houseek.dto.SignUpDto;
 import com.fci.cu.houseek.dto.UserDto;
-import com.fci.cu.houseek.models.Apartment;
-import com.fci.cu.houseek.models.ApartmentImages;
-import com.fci.cu.houseek.models.ProofOfApartmentOwnership;
-import com.fci.cu.houseek.models.User;
+import com.fci.cu.houseek.models.*;
 import com.fci.cu.houseek.services.FirebaseStorageService;
 import com.fci.cu.houseek.services.impl.UserServiceImplementation;
+import com.fci.cu.houseek.services.interfaces.ApartmentService;
 import com.fci.cu.houseek.services.interfaces.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -31,13 +30,14 @@ public class AuthController {
 
     private final UserServiceImplementation userServiceImplementation;
     private final UserAuthenticationProvider userAuthenticationProvider;
-    //private final UserService
+    private final ApartmentService apartmentService;
 
     @PostMapping("/login")
-    public ResponseEntity<UserDto> login(@RequestBody @Valid CredentialsDto credentialsDto) {
+    public UserDto login(@RequestBody @Valid CredentialsDto credentialsDto) {
         UserDto userDto = userServiceImplementation.login(credentialsDto);
+        System.out.println(userDto);
         userDto.setToken(userAuthenticationProvider.createToken(userDto.getUserName()));
-        return ResponseEntity.ok(userDto);
+        return userDto;
     }
 
     @PostMapping("/register")
@@ -47,60 +47,65 @@ public class AuthController {
         return ResponseEntity.created(URI.create("/users/" + createdUser.getId())).body(createdUser);
     }
 
- /*  @PostMapping   ("/print")
-    public String print( @RequestParam("description") String description,
-                         @RequestParam("location") String location) {
 
-        return "Hi in backend"+description+location;
-    }*/
 
-  /*  @PostMapping("/edit")
-    public ResponseEntity<?> editUser(
-            @RequestParam("images") MultipartFile image,
-            @RequestParam("name")String name,
-            @RequestParam("email") String email,
+    @PostMapping("/edit")
+    public ResponseEntity<?> edit(
+
+            @RequestParam("image") MultipartFile image,
+            @RequestParam("name") String name,
             @RequestParam("phone") String phone,
-            @RequestParam("password") String password,
-            @RequestParam("userName") String userName
-
-
+            @RequestParam("email") String email,
+            @RequestParam("id") long id,
+            @RequestParam("password") String password
     )
 
     {
 
+        User user=new User();
+
+        user.setPassword(password);
+        user.setName(name);
+        user.setEmail(email);
+        user.setPhone(phone);
+        user.setId(id);
+
+
 
         try {
-            User newUser = buildUser(name,email,userName,password,phone,image);
-            Apartment savedApartment = UserService.saveApartment(newUser);
-            return ResponseEntity.ok(savedApartment);
-        } catch (IOException e) {
+
+            try (InputStream fileInputStream = image.getInputStream())
+            {
+                String fileName = image.getOriginalFilename();
+                String uploadedImageUrl = FirebaseStorageService.uploadImage(fileInputStream, fileName);
+                user.setUserImage(uploadedImageUrl);
+            }
+            UserDto newUser=userServiceImplementation.editUserData(user);
+
+            return ResponseEntity.created(URI.create("/users/" + newUser.getId())).body(newUser);
+
+            }
+        catch (IOException e)
+        {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving apartment");
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error Update User");
         }
     }
 
-    private User buildUser(
-            String name, String email, String userName, String password,
-            String phone,
-            MultipartFile image) throws IOException {
-
-        User newUser = new User();
-        newUser.setName(name);
-        newUser.setUserName(userName);
-        newUser.setPhone(phone);
-        newUser.setEmail(email);
-        newUser.setPassword(password);
-
-
-        try (InputStream fileInputStream = image.getInputStream()) {
-            String fileName = image.getOriginalFilename();
-            String uploadedImageUrl = FirebaseStorageService.uploadImage(fileInputStream, fileName);
-            newUser.setUserImage(uploadedImageUrl);
-
+    @GetMapping ("/userApartments")
+    public List<AppartmentDto> userApartments(@RequestParam("userId") long userId)
+    {
+        return userServiceImplementation.userApartments(userId);
     }
 
-        return newUser;
-    }*/
+
+
+
+
+
+
+
 
 
 }

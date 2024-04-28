@@ -30,12 +30,9 @@ public class User {
     private String phone;
 
     //map one user to many apartment
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Apartment>userApartment;
+    /*@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Apartment>userApartment;*/
 
-
-//    @OneToOne(mappedBy = "user",  orphanRemoval = true)
-//    private UserImage image;
 
 
     @Column(name = "userImage",nullable = true)
@@ -46,16 +43,6 @@ public class User {
 
 
 
-
-
-
-    /*@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Authority> authorities;
-
-    public List<Authority> getAuthorities() {
-        return authorities;
-    }
-    private String role;*/
 
 
 

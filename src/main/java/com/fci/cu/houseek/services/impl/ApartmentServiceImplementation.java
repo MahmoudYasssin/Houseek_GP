@@ -2,6 +2,7 @@ package com.fci.cu.houseek.services.impl;
 
 import com.fci.cu.houseek.dto.ApartmentImageDto;
 import com.fci.cu.houseek.dto.AppartmentDto;
+import com.fci.cu.houseek.dto.Notification;
 import com.fci.cu.houseek.models.*;
 import com.fci.cu.houseek.repositories.*;
 import com.fci.cu.houseek.services.interfaces.ApartmentService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,6 +25,8 @@ public class ApartmentServiceImplementation implements ApartmentService {
     private final ProofOfApartmentOwnershipRepository proofOfApartmentOwnershipRepository;
     private final FavouriteListRepository favouriteListRepository;
     private final ApartmentViewsRepository apartmentViewsRepository;
+    private final MessagesRepository messagesRepository;
+    private  final UserRepository userRepository;
 
 
     public AppartmentDto convertApartmentToApartmentDto(Apartment apartment)
@@ -210,19 +214,23 @@ public class ApartmentServiceImplementation implements ApartmentService {
     }
 
     //set user_id ----> apartment_id
-    public void addToFavouriteList(long userId,long apartmentId)
-    {
-        List<FavouriteList> favouriteList=new ArrayList<>();
-        FavouriteList f=new FavouriteList();
-        favouriteList=apartmentRepository.apartmentIfExistInFav(userId,apartmentId);
+    public void addToFavouriteList(long vistorId,long apartmentId) {
+        List<FavouriteList> favouriteList = new ArrayList<>();
+        FavouriteList f = new FavouriteList();
+        favouriteList = apartmentRepository.apartmentIfExistInFav(vistorId, apartmentId);
 
-        if(favouriteList.isEmpty())
-        {
-            f.setApartmentId(apartmentId);
-            f.setUserId(userId);
-            favouriteListRepository.save(f);
+        if (favouriteList.isEmpty()) {
+            Optional<Apartment> apartment = apartmentRepository.findById(apartmentId);
+            if (apartment.isPresent()) {
+                Apartment apartment1 = apartment.get();
+                f.setApartmentId(apartmentId);
+                f.setVistorId(vistorId);
+                f.setOwnerId(apartment1.getUserId());
+                f.setOwnerIsView(false);
+                favouriteListRepository.save(f);
+            }
+
         }
-
     }
 
     //get
@@ -268,9 +276,21 @@ public class ApartmentServiceImplementation implements ApartmentService {
 
         if(apartmentViews1.isEmpty() || apartmentViews==null)
         {
+            Optional<Apartment> apartment=apartmentRepository.findById(apartmentId);
+            Apartment apartment1;
+
+            long owner_id = 0;
+            if (apartment.isPresent())
+            {
+                apartment1 = apartment.get();
+                owner_id=apartment1.getUserId();
+            }
+
             ApartmentViews apartmentViews2=new ApartmentViews();
             apartmentViews2.setApartmentId(apartmentId);
-            apartmentViews2.setUserId(userId);
+            apartmentViews2.setVistorId(userId);
+            apartmentViews2.setOwnerIsView(false);
+            apartmentViews2.setOwnerId(owner_id);
             apartmentViewsRepository.save(apartmentViews2);
         }
 
@@ -280,7 +300,167 @@ public class ApartmentServiceImplementation implements ApartmentService {
 
     }
 
+    @Override
+    public void userMessages(long apartmentId, String message) {
+        Message message1=new Message();
+        Optional<Apartment> apartment=apartmentRepository.findById(apartmentId);
+        Apartment apartment1=new Apartment();
+        long owner_id = 0;
+        if (apartment.isPresent())
+        {
+            apartment1 = apartment.get();
+            owner_id=apartment1.getUserId();
+        }
+        User user=new User();
+        user=userRepository.findUserById(owner_id);
+        String userName;
+        userName=user.getUserName();
 
+
+        message1.setUserName(userName);
+        message1.setMessage(message);
+        message1.setIsRead(false);
+        messagesRepository.save(message1);
+    }
+
+    @Override
+    public List<Notification> userAllMessages(String userName) {
+        List<Message> messageList = new ArrayList<>();
+        List<Notification> messageListfinall = new ArrayList<>();
+
+
+        // Fetch messages from repository
+        messageList = messagesRepository.allMessages(userName);
+        for(Message m:messageList)
+        {
+            Notification notification=new Notification() ;
+            notification.setIsRead(m.getIsRead());
+            notification.setMessage(m.getMessage());
+            notification.setWho("admin");
+            messageListfinall.add(notification);
+        }
+
+
+        //update is read with true
+        messagesRepository.updateMessageByUser(userName);
+
+
+        // Return the modified message list
+        return messageListfinall;
+    }
+
+    @Override
+    public List<Notification> messageWhoAddToFavList(String username) {
+        Optional<User> user=userRepository.findUserByUsername(username);
+
+
+        User user1;
+        List<Notification>AllViewers =new ArrayList<>();
+
+        long owner_id = 0;
+        if (user.isPresent())
+        {
+                user1 = user.get();
+                 owner_id=user1.getId();
+        }
+        List<FavouriteList>favouriteLists;
+        favouriteLists=favouriteListRepository.whoSeeOwnerApartment(owner_id);
+        System.out.println(favouriteLists.size());
+        System.out.println("---------------------");
+
+        for (FavouriteList f:favouriteLists)
+        {
+            long vistorId;
+            vistorId=f.getVistorId();
+            System.out.println(vistorId);
+
+            User user2=userRepository.findUserById(vistorId);
+            System.out.println(user2);
+
+            if(user2==null)
+            {
+                System.out.println("User Not Found");
+            }
+
+            String vistorName;
+            vistorName=user2.getUserName();
+            System.out.println(vistorName);
+
+            Notification notification =new Notification();
+            notification.setWho(vistorName);
+            notification.setIsRead(f.getOwnerIsView());
+            notification.setMessage(vistorName+" add your apartment to the Fav lIst");///////**
+            System.out.println(notification);
+
+            AllViewers.add(notification);
+            System.out.println(AllViewers.size());
+
+            System.out.println(AllViewers);
+
+
+        }
+        favouriteListRepository.updateFavListIsRead(owner_id);
+        return AllViewers;
+    }
+
+    @Override
+    public List<Notification> messageWhoViewApartment(String userName) {
+        Optional<User> user=userRepository.findUserByUsername(userName);
+        System.out.println(user);
+        System.out.println("--------------");
+
+        User user1;
+        List<Notification>AllViewers =new ArrayList<>();
+
+
+        long owner_id = 0;
+        if (user.isPresent())
+        {
+            user1 = user.get();
+            owner_id=user1.getId();
+            System.out.println(owner_id);
+            System.out.println("------------------");
+
+
+        }
+
+        List<ApartmentViews>apartmentViews;
+        apartmentViews=apartmentViewsRepository.whoSeeOwnerApartment(owner_id);
+
+        for (ApartmentViews f:apartmentViews)
+        {
+            long vistorId;
+            vistorId=f.getVistorId();
+            System.out.println(vistorId);
+
+            User user2=userRepository.findUserById(vistorId);
+
+            if(user2==null)
+            {
+                System.out.println("User Not Found");
+            }
+
+            String vistorName;
+            vistorName=user2.getUserName();
+            System.out.println(vistorName);
+
+            Notification notification =new Notification();
+            notification.setWho(vistorName);
+            notification.setIsRead(f.getOwnerIsView());
+            notification.setMessage(vistorName+" view your apartment and check it");///////**
+
+            System.out.println(notification);
+
+            AllViewers.add(notification);
+
+
+
+        }
+        apartmentViewsRepository.updateApartmentIsviewed(owner_id);
+        return AllViewers;
+
+
+    }
 
 
 }

@@ -1,7 +1,9 @@
 package com.fci.cu.houseek.services.interfaces;
 
 import com.fci.cu.houseek.dto.AppartmentDto;
+import com.fci.cu.houseek.dto.Notification;
 import com.fci.cu.houseek.models.Apartment;
+import com.fci.cu.houseek.models.Message;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -26,6 +28,15 @@ public interface ApartmentService {
     long HowManyApartmentExist(long apartmentId);
 
     long numOfApartmentViews(long userId,long apartmentId);
+
+    void userMessages(long apartmentId,String message);
+    List<Notification> userAllMessages(String userName);
+
+    List<Notification>messageWhoAddToFavList(String userName);
+
+    List<Notification>messageWhoViewApartment(String userName);
+
+
 
 
 

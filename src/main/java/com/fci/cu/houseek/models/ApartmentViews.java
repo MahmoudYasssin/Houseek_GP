@@ -12,12 +12,19 @@ public class ApartmentViews {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "userId", nullable = false)
-    private long userId;
+    @Column(name = "vistorId", nullable = false)
+    private long vistorId;
+
+    @Column(name = "ownerId", nullable = false)
+    private long ownerId;
 
 
     @Column(name = "apartmentId", nullable = false)
     private long apartmentId;
+
+
+    @Column(name = "ownerIsView",  nullable = false, columnDefinition = "VARCHAR(8) DEFAULT 'false'")
+    private Boolean ownerIsView;
 
 
 
