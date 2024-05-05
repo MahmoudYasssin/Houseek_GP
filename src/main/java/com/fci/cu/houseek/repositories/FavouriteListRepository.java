@@ -36,6 +36,9 @@ public interface FavouriteListRepository extends JpaRepository<FavouriteList, Lo
     @Query("UPDATE FavouriteList m SET m.ownerIsView = true WHERE m.ownerId = :ownerId")
     int updateFavListIsRead(@Param("ownerId") long ownerId);
 
+    //@Query("SELECT u.apartmentId FROM FavouriteList u GROUP BY u.apartmentId ORDER BY COUNT(u.apartmentId) DESC")
+    //Long findMostFrequentApartmentId();
+
 
 
 }

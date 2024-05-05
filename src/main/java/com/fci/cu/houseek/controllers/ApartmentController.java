@@ -166,7 +166,7 @@ public class ApartmentController {
     @GetMapping ("/howManyApartmentExistInFav")
     public long howManyApartmentExist(@RequestParam("apartmentId") Long apartmentId)
     {
-      return   apartmentService.HowManyApartmentExist(apartmentId);
+      return  apartmentService.HowManyApartmentExist(apartmentId);
     }
 
     @GetMapping ("/numOfApartmentViews")
@@ -180,6 +180,21 @@ public class ApartmentController {
     public void editApartmentStatus(@RequestParam("apartmentId")Long apartmentId,@RequestParam("newStatus") String newStatus)
     {
         apartmentService.editStatus(apartmentId,newStatus);
+    }
+
+
+   /* @GetMapping ("/findMostApartmentFreq")
+
+    public void xx()
+    {
+         apartmentService.findMostApartmentFreq();
+    }*/
+
+    @GetMapping("/selectAllForDash")
+    public List<AppartmentDto>selectAllForDash()
+    {
+
+        return apartmentService.selectAllForDash();
     }
 
 

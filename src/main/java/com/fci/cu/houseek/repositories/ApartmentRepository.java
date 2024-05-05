@@ -39,6 +39,9 @@ public interface ApartmentRepository extends JpaRepository<Apartment, Long> {
     @Query("SELECT u FROM Apartment u WHERE u.status = :status")
     List<AppartmentDto> SelectSpecifiedStatus(@Param("status") String status);
 
+ //   @Query("SELECT U FROM Apartment u WHERE u.id = :apartmentId")
+  //  Apartment findApartmentById(@Param("apartmentId")long apartmentId);
+
 
 
     @Query("SELECT u FROM Apartment u WHERE u.userId = :userId")

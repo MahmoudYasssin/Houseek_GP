@@ -114,6 +114,15 @@ public class ApartmentServiceImplementation implements ApartmentService {
         for (Apartment apartment : apartments) {
             AppartmentDto appartmentDto = new AppartmentDto();
             appartmentDto=convertApartmentToApartmentDto(apartment);
+            long userId;
+            userId=apartment.getUserId();
+            User user=new User();
+            user=userRepository.findUserById(userId);
+            String apartmentOwnerUserName;
+            apartmentOwnerUserName=user.getUserName();
+            appartmentDto.setApartmentOwner(apartmentOwnerUserName);
+
+
 
            /* appartmentDto.setId(apartment.getId());
             appartmentDto.setArea(apartment.getArea());
@@ -342,7 +351,7 @@ public class ApartmentServiceImplementation implements ApartmentService {
 
 
         //update is read with true
-        messagesRepository.updateMessageByUser(userName);
+        //messagesRepository.updateMessageByUser(userName);
 
 
         // Return the modified message list
@@ -365,17 +374,17 @@ public class ApartmentServiceImplementation implements ApartmentService {
         }
         List<FavouriteList>favouriteLists;
         favouriteLists=favouriteListRepository.whoSeeOwnerApartment(owner_id);
-        System.out.println(favouriteLists.size());
-        System.out.println("---------------------");
+       /// System.out.println(favouriteLists.size());
+        //System.out.println("---------------------");
 
         for (FavouriteList f:favouriteLists)
         {
             long vistorId;
             vistorId=f.getVistorId();
-            System.out.println(vistorId);
+            //System.out.println(vistorId);
 
             User user2=userRepository.findUserById(vistorId);
-            System.out.println(user2);
+           /// System.out.println(user2);
 
             if(user2==null)
             {
@@ -384,7 +393,7 @@ public class ApartmentServiceImplementation implements ApartmentService {
 
             String vistorName;
             vistorName=user2.getUserName();
-            System.out.println(vistorName);
+          //  System.out.println(vistorName);
 
             Notification notification =new Notification();
             notification.setWho(vistorName);
@@ -393,21 +402,21 @@ public class ApartmentServiceImplementation implements ApartmentService {
             System.out.println(notification);
 
             AllViewers.add(notification);
-            System.out.println(AllViewers.size());
+          //  System.out.println(AllViewers.size());
 
-            System.out.println(AllViewers);
+         //   System.out.println(AllViewers);
 
 
         }
-        favouriteListRepository.updateFavListIsRead(owner_id);
+       // favouriteListRepository.updateFavListIsRead(owner_id);
         return AllViewers;
     }
 
     @Override
     public List<Notification> messageWhoViewApartment(String userName) {
         Optional<User> user=userRepository.findUserByUsername(userName);
-        System.out.println(user);
-        System.out.println("--------------");
+       // System.out.println(user);
+       // System.out.println("--------------");
 
         User user1;
         List<Notification>AllViewers =new ArrayList<>();
@@ -418,8 +427,8 @@ public class ApartmentServiceImplementation implements ApartmentService {
         {
             user1 = user.get();
             owner_id=user1.getId();
-            System.out.println(owner_id);
-            System.out.println("------------------");
+           // System.out.println(owner_id);
+          //  System.out.println("------------------");
 
 
         }
@@ -456,10 +465,81 @@ public class ApartmentServiceImplementation implements ApartmentService {
 
 
         }
-        apartmentViewsRepository.updateApartmentIsviewed(owner_id);
+       // apartmentViewsRepository.updateApartmentIsviewed(owner_id);
         return AllViewers;
 
 
+    }
+
+    @Override
+    public void editMessageStatus(String UserName) {
+
+        messagesRepository.updateMessageByUser(UserName);
+
+        Optional<User> user=userRepository.findUserByUsername(UserName);
+
+
+        User user1;
+
+        long owner_id = 0;
+        if (user.isPresent())
+        {
+            user1 = user.get();
+            owner_id=user1.getId();
+        }
+
+        apartmentViewsRepository.updateApartmentIsviewed(owner_id);  //edit view status
+        favouriteListRepository.updateFavListIsRead(owner_id); //edit fav status
+
+    }
+
+  /*  @Override
+    public void findMostApartmentFreq() {
+        long id=favouriteListRepository.findMostFrequentApartmentId();
+        System.out.println("The Most Apartment founded is:"+id);
+        /*Apartment apartment=apartmentRepository.findApartmentById(id);
+        System.out.println(apartment);
+
+
+
+        AppartmentDto appartmentDto=new AppartmentDto();
+        appartmentDto=convertApartmentToApartmentDto(apartment);
+    }*/
+
+    @Override
+    public List<AppartmentDto> selectAllForDash() {
+        List<Apartment> apartments = apartmentRepository.findAll();
+        List<AppartmentDto> appartmentDtos = new ArrayList<>();
+
+        for (Apartment apartment : apartments) {
+            AppartmentDto appartmentDto = new AppartmentDto();
+            appartmentDto=convertApartmentToApartmentDto(apartment);
+
+
+
+            List<ApartmentImageDto> imageDtos = apartment.getImagesProof()
+                    .stream()
+                    .map(image -> {
+                        ApartmentImageDto imageDto = new ApartmentImageDto();
+                        imageDto.setId(image.getId());
+                        imageDto.setImageUrl(image.getProofImageUrl());
+                        return imageDto;
+                    })
+                    .collect(Collectors.toList());
+
+            appartmentDto.setImagesProof(imageDtos);
+
+            long userId;
+            userId=apartment.getUserId();
+            User user=new User();
+            user=userRepository.findUserById(userId);
+            String apartmentOwnerUserName;
+            apartmentOwnerUserName=user.getUserName();
+            appartmentDto.setApartmentOwner(apartmentOwnerUserName);
+            appartmentDtos.add(appartmentDto);
+        }
+
+        return appartmentDtos;
     }
 
 

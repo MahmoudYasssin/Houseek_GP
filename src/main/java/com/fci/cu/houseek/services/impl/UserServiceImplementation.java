@@ -45,8 +45,10 @@ public class UserServiceImplementation implements UserService {
         User user = userRepository.findUserByUsername(credentialsDto.getUserName())
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
 
+       // System.out.println(user);
         if (passwordEncoder.matches(CharBuffer.wrap(credentialsDto.getPassword()), user.getPassword())) {
             UserDto userDto= userMapper.toUserDto(user);
+            userDto.setRole(user.getRole());
             userDto.setUserImage(user.getUserImage());
             System.out.println(userDto);
             return  userDto;
@@ -65,8 +67,12 @@ public class UserServiceImplementation implements UserService {
 
         User user = userMapper.signUpToUser(userDto);
         user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDto.getPassword())));
+        user.setRole("USER");
+        System.out.println(user);
+
 
         User savedUser = userRepository.save(user);
+
 
         return userMapper.toUserDto(savedUser);
     }

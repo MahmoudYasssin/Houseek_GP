@@ -2,7 +2,6 @@ package com.fci.cu.houseek.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import java.util.List;
 
 @Data
 @Entity
@@ -37,6 +36,10 @@ public class User {
 
     @Column(name = "userImage",nullable = true)
     private String userImage;
+
+    @Column(name = "role", nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'USER'")
+    private String role;
+
 
 
 

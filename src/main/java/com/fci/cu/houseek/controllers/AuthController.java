@@ -35,14 +35,17 @@ public class AuthController {
     @PostMapping("/login")
     public UserDto login(@RequestBody @Valid CredentialsDto credentialsDto) {
         UserDto userDto = userServiceImplementation.login(credentialsDto);
-        System.out.println(userDto);
+       // System.out.println(userDto);
         userDto.setToken(userAuthenticationProvider.createToken(userDto.getUserName()));
         return userDto;
     }
 
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@RequestBody @Valid SignUpDto user) {
+      //  user.setRole("USER");
         UserDto createdUser = userServiceImplementation.register(user);
+        System.out.println(createdUser);
+        createdUser.setRole("USER");
         createdUser.setToken(userAuthenticationProvider.createToken(user.getUserName()));
         return ResponseEntity.created(URI.create("/users/" + createdUser.getId())).body(createdUser);
     }

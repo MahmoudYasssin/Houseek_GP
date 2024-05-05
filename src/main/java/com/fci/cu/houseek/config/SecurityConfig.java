@@ -36,17 +36,20 @@ public class SecurityConfig {
                         .requestMatchers("/apartment/sell/howManyApartmentExistInFav").authenticated()
                         .requestMatchers("/apartment/sell/numOfApartmentViews").permitAll()
                         .requestMatchers("/apartment/sell/editApartmentStatus").permitAll()
+                       // .requestMatchers("/apartment/sell/findMostApartmentFreq").permitAll()
                         .requestMatchers("/userApartments").authenticated()
                         .requestMatchers("/apartment/sell/search").permitAll()
                         .requestMatchers("/apartment/sell/selectAll").permitAll()
+                        .requestMatchers("/apartment/sell/selectAllForDash").permitAll()
                         .requestMatchers("/edit").authenticated()
                         .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
                       //  .requestMatchers(HttpMethod.GET, "/print", "").authenticated()
 
                         .requestMatchers("/dashboard/sendMessage").permitAll()
-                       .requestMatchers("/dashboard/showMessages").permitAll()
+                       .requestMatchers("/dashboard/showMessages").authenticated()
+                       .requestMatchers("/dashboard/editMessageStatus").authenticated()
                        .requestMatchers("/dashboard/showWhoAddMyApartmentToFavList").permitAll()
-                       .requestMatchers("/dashboard/showWhoMyApartment").permitAll()
+                       .requestMatchers("/dashboard/showWhoViewMyApartment").permitAll()
 
 
                         .anyRequest().authenticated())

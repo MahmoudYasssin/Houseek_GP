@@ -19,5 +19,6 @@ public class UserDto {
     private String phone;
     private String token;
     private String userImage;
+    private  String role;
 
 }

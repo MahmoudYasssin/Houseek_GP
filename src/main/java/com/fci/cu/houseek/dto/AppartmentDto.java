@@ -35,6 +35,8 @@ public class AppartmentDto {
     private String description;
     private String status;
     private List<ApartmentImageDto> images;
+    private List<ApartmentImageDto> imagesProof;
+    private String apartmentOwner;
 
 
 
@@ -63,6 +65,7 @@ public class AppartmentDto {
 
 
     }
+
   /*  public AppartmentDto convertApartmentToApartmentDto(Apartment apartment)
     {
         AppartmentDto appartmentDto = new AppartmentDto();

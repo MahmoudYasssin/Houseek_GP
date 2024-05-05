@@ -11,6 +11,7 @@ import java.util.List;
 public interface ApartmentService {
     Apartment saveApartment(Apartment apartment);
     List<AppartmentDto> selectAll();
+    List<AppartmentDto> selectAllForDash();
 
     List<AppartmentDto> selectSpecifiedStatus(String status);
 
@@ -35,6 +36,12 @@ public interface ApartmentService {
     List<Notification>messageWhoAddToFavList(String userName);
 
     List<Notification>messageWhoViewApartment(String userName);
+
+   // void findMostApartmentFreq();
+    void editMessageStatus(String UserName);
+
+
+
 
 
 

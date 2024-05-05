@@ -33,10 +33,17 @@ public class NotificationController {
         return apartmentService.messageWhoAddToFavList(userName);
     }
 
-    @GetMapping("/showWhoMyApartment")
+    @GetMapping("/showWhoViewMyApartment")
     public List<Notification>showWhoSeeMyApartment(@RequestParam("userName")String userName)
     {
         return apartmentService.messageWhoViewApartment(userName);
+    }
+
+
+    @PostMapping("/editMessageStatus")
+    public void editMessageStatus(@RequestParam("userName")String userName)
+    {
+         apartmentService.editMessageStatus(userName);
     }
 
 
