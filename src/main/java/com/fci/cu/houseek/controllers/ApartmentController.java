@@ -197,6 +197,24 @@ public class ApartmentController {
         return apartmentService.selectAllForDash();
     }
 
+    @GetMapping("/numbersOfStatus")
+    public long[]numbersOfStatus()
+    {
+        return apartmentService.numOfSepcificStatus();
+    }
+
+    @GetMapping("/numOfApartmentTitle")
+    public long[]numOfApartmentTitle()
+    {
+        return apartmentService.numOfApartmentTitle();
+    }
+
+    @GetMapping("/numOfAparmtmentInCity")
+    public long[]numOfAparmtmentInCity()
+    {
+        return apartmentService.numOfAparmtmentCity();
+    }
+
 
 
 

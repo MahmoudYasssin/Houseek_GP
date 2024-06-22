@@ -39,6 +39,9 @@ public interface ApartmentService {
 
    // void findMostApartmentFreq();
     void editMessageStatus(String UserName);
+    long[] numOfSepcificStatus();
+    long[] numOfApartmentTitle();
+    long[] numOfAparmtmentCity();
 
 
 

@@ -493,6 +493,8 @@ public class ApartmentServiceImplementation implements ApartmentService {
 
     }
 
+
+
   /*  @Override
     public void findMostApartmentFreq() {
         long id=favouriteListRepository.findMostFrequentApartmentId();
@@ -540,6 +542,50 @@ public class ApartmentServiceImplementation implements ApartmentService {
         }
 
         return appartmentDtos;
+    }
+    @Override
+    public long[] numOfSepcificStatus() {
+
+        long[] numbersOfStatus = new long[3]; // Allocate memory for 3 elements
+
+        numbersOfStatus[0] = apartmentRepository.numOfSepcificStatus("accepted");
+        numbersOfStatus[1] = apartmentRepository.numOfSepcificStatus("pending");
+        numbersOfStatus[2] = apartmentRepository.numOfSepcificStatus("rejected");
+
+
+        return numbersOfStatus;
+    }
+
+    @Override
+    public long[] numOfApartmentTitle() {
+        long[] numOfApartmentTitle = new long[4]; // Allocate memory for 3 elements
+
+        numOfApartmentTitle[0] = apartmentRepository.numOfApartmentTitle("Apartment");
+        numOfApartmentTitle[1] = apartmentRepository.numOfApartmentTitle("Villa");
+        numOfApartmentTitle[2] = apartmentRepository.numOfApartmentTitle("Shop");
+        numOfApartmentTitle[3] = apartmentRepository.numOfApartmentTitle("Land");
+
+
+        return numOfApartmentTitle;
+    }
+
+    @Override
+    public long[] numOfAparmtmentCity() {
+        long[] numOfAparmtmentInCity = new long[10]; // Allocate memory for 3 elements
+
+        numOfAparmtmentInCity[0] = apartmentRepository.numOfAparmtmentInCity("Cairo");
+        numOfAparmtmentInCity[1] = apartmentRepository.numOfAparmtmentInCity("Alexandria");
+        numOfAparmtmentInCity[2] = apartmentRepository.numOfAparmtmentInCity("Giza");
+        numOfAparmtmentInCity[3] = apartmentRepository.numOfAparmtmentInCity("Shubra El Kheima");
+        numOfAparmtmentInCity[3] = apartmentRepository.numOfAparmtmentInCity("Port Said");
+        numOfAparmtmentInCity[3] = apartmentRepository.numOfAparmtmentInCity("Suez");
+        numOfAparmtmentInCity[3] = apartmentRepository.numOfAparmtmentInCity("Luxor");
+        numOfAparmtmentInCity[3] = apartmentRepository.numOfAparmtmentInCity("Asyut");
+        numOfAparmtmentInCity[3] = apartmentRepository.numOfAparmtmentInCity("Mansoura");
+        numOfAparmtmentInCity[3] = apartmentRepository.numOfAparmtmentInCity("Tanta");
+
+
+        return numOfAparmtmentInCity;
     }
 
 

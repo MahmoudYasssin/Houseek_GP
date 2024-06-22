@@ -54,6 +54,22 @@ public interface ApartmentRepository extends JpaRepository<Apartment, Long> {
     List<FavouriteList> apartmentIfExistInFav(@Param("userId") long userId, long apartmentId);
 
 
+   // @Query("SELECT u FROM Apartment u WHERE u.status = :status")
+   @Query("SELECT COUNT(u) FROM Apartment u WHERE u.status LIKE %:status%")
+    long numOfSepcificStatus(String status);
+
+
+    //@Query("SELECT u FROM Apartment u WHERE u.propertyType = :propertyType")
+    @Query("SELECT COUNT(u) FROM Apartment u WHERE u.title LIKE %:title%")
+    long numOfApartmentTitle(String title);
+
+
+
+    //@Query("SELECT u FROM Apartment u WHERE u.propertyType = :propertyType")
+    @Query("SELECT COUNT(u) FROM Apartment u WHERE u.location LIKE %:location%")
+    long numOfAparmtmentInCity(String location);
+
+
 
 
 
