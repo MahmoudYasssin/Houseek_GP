@@ -1,0 +1,13 @@
+.list {
+  transition: transform 0.4s ease-in-out; /* Add transition property */
+}
+
+.list:hover {
+  background-color: #0eaaa6;
+  border-radius: 5px;
+  transform: translateX(10px); /* Move the element 10px to the right */
+}
+
+.headerUser:hover{
+  background-color: rgb(240, 239, 239);
+}

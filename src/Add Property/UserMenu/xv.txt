@@ -1,0 +1,34 @@
+<ul
+            className="shadow-lg"
+            style={{
+              marginTop: "0px",
+              marginBottom: "0px",
+              left: "0",
+              padding: "0",
+            }}
+          >
+            <li className="list">
+              <Link style={{ margin: "0", padding: "0" }} to="/fav">
+                <i style={{ color: "red", marginRight: "15px" }} className="fa-solid fa-heart"></i>
+                Favourites
+              </Link>
+            </li>
+            <li className="list">
+              <Link style={{ margin: "0", padding: "0", width: "100%" }} to="/setting">
+                <i style={{ marginRight: "10px" }} className="fa-solid fa-user"></i>
+                Profile
+              </Link>
+            </li>
+            <li className="list">
+              <Link style={{ margin: "0", padding: "0", width: "100%" }} to="/profile">
+                <i style={{ marginRight: "10px" }} className="fa-solid fa-user"></i>
+                Setting
+              </Link>
+            </li>
+            <li className="list" onClick={handleLogout}>
+              <a href="#">
+                <i style={{ marginRight: "10px" }} className="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </a>
+            </li>
+          </ul>

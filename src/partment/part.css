@@ -1,0 +1,127 @@
+/* RealEstateAd.css */
+ 
+.card {
+  margin-top: 70px;
+  margin-left: 80px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+ 
+.card-header {
+  position: relative;
+  overflow: hidden;
+}
+ 
+.card-image {
+  width: 100%;
+  height: auto;
+}
+ 
+.card-details {
+  padding: 20px;
+  display: flex;
+  
+  align-items: center;
+}
+ 
+.ad-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+ 
+.ad-price {
+  font-size: 18px;
+  color: #4caf50;
+  margin-bottom: 10px;
+}
+ 
+.ad-description {
+  color: #666;
+  margin-bottom: 20px;
+}
+/* Your existing styles */
+ 
+/* Your existing styles */
+ 
+.disc {
+  display: flex; /* Use flexbox to make children align horizontally */
+  align-items: center; /* Center items vertically */
+  justify-content: space-between; /* Align items to the left */
+  gap: 10px; /* Adjust the space between items */
+}
+ 
+.disc i {
+  font-size: 30px;
+}
+ 
+.liked {
+  color: red;
+}
+.card .informations ,.Details ,.foter .Details{
+  display: flex;
+  font-size: 18px;
+  align-items: center;
+}
+.card .Details {
+  align-items: center;
+}
+.card .Details p {
+  margin-left: 10px;
+  margin-right: 25px;
+}
+.card-header {
+  max-width: 100% !important;
+  transition: opacity 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  transition: scroll 0.3s ease-in-out;
+}
+.card-header::-webkit-scrollbar {
+  display: none;
+}
+.card-header img {
+  max-width: 100% !important;
+  max-height: 451px;
+  transition: transform 0.3s ease-in-out;
+  object-fit: cover;
+}
+.card-header img:not(img:last-child) {
+  margin-right: 5px;
+}
+.card span {
+  color: black;
+  z-index: 15;
+  position: absolute;
+  top: calc(70% - 45px);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.card .right {
+  right: 47%;
+}
+.card-header .left {
+  right: 47%;
+}
+.card .left:hover,
+.card .right:hover {
+  transform: scale(1.5);
+  background-color: #eeeeee31;
+}
+.card span i{
+  color: black;
+}

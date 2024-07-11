@@ -1,0 +1,106 @@
+/* TableWithButtons.css */
+/* Table.css */
+
+.cool-div {
+  width: 15%;
+  height: 5%;
+  text-align: center;
+  background-color: #00a9a4;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+  margin-top: 90px;
+  margin-bottom: 0;
+  border-radius: 5px;
+  margin-left: 79px;
+}
+.cool-div2 {
+  width: 15%;
+  height: 5%;
+  text-align: center;
+  color: #fff;
+  margin-top: 90px;
+  margin-left: 80px;
+}
+
+table {
+  margin-left: 80px;
+  border-collapse: collapse;
+  width: 90%;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+button {
+  cursor: pointer;
+}
+
+.accept-btn {
+  color: white;
+  background-color: #4caf50;
+  border: none;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 2px 2px;
+}
+
+.reject-btn {
+  color: white;
+  background-color: #f44336;
+  border: none;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 2px 2px;
+}
+button:active {
+  background-color: black; /* Change border color */
+  color: white; /* Add a box shadow to indicate focus */
+}
+
+.DATA{
+  width: fit-content;
+  height:fit-content;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 50;
+}
+
+.message{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.message textarea{
+  width: 90%;
+  
+}
+.message button,.open-data{
+  border: none;
+  background-color:#035350 ;
+  padding: 4px;
+  color: white;
+  font-size: medium;
+}
+.DATA th,
+.DATA td {
+  border: none; /* Remove borders within .DATA */
+}

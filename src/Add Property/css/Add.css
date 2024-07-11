@@ -1,0 +1,552 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Playfair+Display:wght@400;500;600;700&display=swap");
+* {
+  text-decoration: none;
+}
+header {
+  margin-top: -30px;
+  border: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  text-decoration: none;
+  list-style: none;
+}
+.dashboard {
+  /* padding: 0;
+    margin: 0;
+    border: 0; */
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  text-decoration: none;
+  list-style: none;
+  position: relative;
+}
+/* Start nav */
+
+nav {
+  font-family: "Playfair Display", serif;
+  background-color: white;
+  z-index: 100;
+  width: 100%;
+  position: fixed;
+  height: 65px;
+  display: flex;
+  box-shadow: 0px -2px 5px black;
+}
+nav a {
+  cursor: pointer;
+  display: block;
+  padding: 20px 23.5px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  height: fit-content;
+}
+/* logo */
+.logo {
+  height: fit-content;
+  background-color: #0eaaa6;
+}
+.logo a i {
+  color: white;
+  font-size: 25px;
+}
+header .logo a {
+  padding: 10px 12px 10px 11.5px;
+}
+/* menu */
+.menu {
+  height: fit-content;
+  transition: 0.3s;
+}
+.menu a i {
+  margin-top: 5px;
+  color: black;
+  opacity: 0.3;
+  font-size: 19px;
+  transition: all 0.3s;
+}
+.menu:hover {
+  background-color: rgb(240, 239, 239);
+}
+.menu:hover i {
+  opacity: 1;
+}
+/* search */
+.search {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+.search .search-input {
+  display: flex;
+  align-items: end;
+}
+.search .search-input input {
+  outline: none;
+  border: none;
+  width: 250px;
+  padding-left: 5px;
+}
+/* notify */
+.notify {
+  height: fit-content;
+  transition: all 0.3s;
+  position: relative;
+}
+.notify a {
+  padding: 21px 20px;
+}
+.notify a i {
+  margin-top: 5px;
+  color: black;
+}
+.notify a:hover {
+  background-color: rgb(240, 239, 239);
+}
+/* user */
+.user .container a span:first-child {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user {
+  transition: all 0.3s;
+}
+.user .container a {
+  padding: 15px 20px;
+}
+.user .container a span,
+.user .container a p {
+  margin: 5px 5px 0 0;
+  color: black;
+}
+.user:hover {
+  background-color: rgb(240, 239, 239);
+}
+/* End nav */
+
+/* start bodywrapper */
+
+/* start leftside */
+.leftside {
+  font-family: "Playfair Display", serif;
+  z-index: 100;
+  margin-top: 65px;
+  height: calc(100vh - 65px);
+  background-color: #213837;
+  width: 75px;
+  position: fixed;
+}
+.leftside ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.leftside ul li {
+  width: 100%;
+}
+.leftside ul li a {
+  display: block;
+  color: #adc8c7;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: 0.4s;
+}
+.leftside ul li a i {
+  font-size: 14px;
+}
+/* .leftside ul li a span{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+.leftside ul li a p {
+  padding-top: 5px;
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  text-transform: capitalize;
+  margin: 0;
+}
+.leftside ul li a:hover {
+  background-color: #0eaaa5bb;
+  color: white;
+}
+/* End left side */
+
+/* Start Big left side */
+.bigleftside {
+  font-family: "Playfair Display", serif;
+  z-index: 100;
+  margin-top: 65px;
+  height: calc(100vh - 65px);
+  background-color: #213837;
+  width: 205px;
+  position: fixed;
+}
+.bigleftside ul {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+.bigleftside ul li {
+  width: 100%;
+  transition: 0.4s;
+}
+.bigleftside ul li a {
+  margin-left: 32px;
+  display: block;
+  color: #adc8c7;
+  width: 60%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+}
+.bigleftside ul li a span i {
+  font-size: 14px;
+  margin-top: 10px;
+}
+.bigleftside ul li a p {
+  padding-top: 5px;
+  font-size: 14px;
+  margin-left: 20px;
+  letter-spacing: 0.3px;
+  text-transform: capitalize;
+}
+.bigleftside ul li:hover {
+  background-color: #0eaaa5bb;
+}
+.bigleftside ul li:hover p,
+.bigleftside ul li:hover i {
+  color: white;
+}
+/* End Big left side */
+
+/* start content */
+.contentwrapper {
+  width: calc(100% - 75px);
+  position: absolute;
+  margin-left: 75px;
+  top: 65px;
+}
+/* Start dashtitle */
+.contentwrapper .dashtitle {
+  font-family: "Playfair Display", serif;
+  width: 100%;
+  padding: 15px 20px;
+  text-align: center;
+  background-color: #0eaaa6;
+  color: white;
+  line-height: 1.6;
+}
+.dashtitle h1 {
+  text-transform: capitalize;
+  font-weight: bold;
+  margin: 0;
+}
+.dashtitle h5 {
+  text-transform: capitalize;
+  font-weight: 800;
+  margin: 0;
+}
+/* End dashtitle */
+
+/* Start dashbody */
+.dashbody {
+  width: 800px;
+  margin: 30px auto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+/* Default styles for all devices */
+
+@media only screen and (max-width: 768px) {
+  /* Styles for devices with a maximum width of 768 pixels */
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  /* Styles for devices with a width between 769 and 1024 pixels */
+}
+
+@media only screen and (min-width: 1025px) {
+  /* Styles for devices with a width larger than 1024 pixels */
+}
+
+.dashbody form {
+  position: relative;
+  width: 100%;
+  top: 200px;
+  margin-left: 40px;
+}
+input,
+textarea {
+  transition: 0.3s;
+}
+input:focus,
+textarea:focus {
+  outline: 1px solid grey;
+  border: none;
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.row h4 {
+  text-transform: capitalize;
+  font-weight: 200;
+  margin: 10px 0;
+  font-size: 18px;
+}
+.row .handle-title input {
+  width: 370px;
+  border: 1px solid rgba(0, 0, 0, 0.153);
+  padding: 10px;
+}
+.row .handle-price {
+  margin-left: 20px;
+}
+.row .handle-price input {
+  width: 370px;
+  border: 1px solid rgba(0, 0, 0, 0.153);
+  padding: 11px;
+}
+.row .handle-price .sign {
+  display: flex;
+}
+.row .handle-price span {
+  padding-top: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+  
+  display: flex;
+  align-items: center;
+}
+.dashbody form .handle-description {
+  margin-bottom: 20px;
+}
+.dashbody form .handle-description h4 {
+  text-transform: capitalize;
+  font-weight: 500;
+  margin: 10px 0;
+  font-size: 18px;
+}
+.dashbody form .handle-description textarea {
+  width: 100%;
+  max-width: 100%;
+  height: 50px;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.159);
+}
+.dashbody form .handle-loc {
+  margin-bottom: 20px;
+}
+.dashbody form .handle-loc h4 {
+  text-transform: capitalize;
+  font-weight: 500;
+  margin: 10px 0;
+  font-size: 18px;
+}
+.dashbody form .handle-loc input {
+  border: 1px solid rgba(0, 0, 0, 0.159);
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+}
+.dashbody .row .handle-bedrooms,
+.dashbody .row .handle-bathrooms,
+.dashbody .row .handle-size,
+.dashbody .row .handle-Type {
+  width: calc(95% / 4);
+}
+.dashbody .row .handle-bed input,
+.dashbody .row .handle-bath input,
+.dashbody .row .handle-size input {
+  border: 1px solid rgba(0, 0, 0, 0.159);
+  padding: 10px;
+}
+input{
+  border-radius: 10px;
+
+}
+.dashbody .row .handle-Type {
+  position: relative;
+}
+.dashbody .row .handle-Type .sold {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.159);
+  cursor: pointer;
+}
+.dashbody .row .handle-Type .sold i {
+  justify-content: flex-end;
+}
+.dashbody .row .handle-Type ul {
+  width: 100%;
+  position: absolute;
+  bottom: -80px;
+  border: 1px solid rgba(0, 0, 0, 0.159);
+  z-index: 5;
+  background-color: white;
+}
+.dashbody .row .handle-Type ul li {
+  padding: 5px;
+  cursor: pointer;
+  text-transform: capitalize;
+  transition: 0.3s;
+}
+.dashbody .row .handle-Type ul li:hover {
+  background-color: rgba(0, 0, 0, 0.126);
+}
+.hide {
+  display: none;
+}
+.dashbody .last-row {
+  display: flex;
+  flex-direction: column;
+}
+.dashbody .last-row h4 {
+  text-transform: capitalize;
+  font-weight: 500;
+  margin: 10px 0;
+  font-size: 18px;
+}
+.dashbody .last-row .handle-images {
+  border: 1px solid rgba(203, 197, 197, 0.496);
+  padding: 20px 10px;
+  max-height: 63px;
+}
+.dashbody .last-row .handle-images input {
+  position: relative;
+  opacity: 0;
+  width: calc(100% + 20px);
+  padding: 21px;
+  top: -38px;
+  left: -10px;
+  cursor: pointer;
+  z-index: 5;
+}
+.dashbody .last-row .handle-images label {
+  text-transform: capitalize;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.194);
+  cursor: pointer;
+}
+.dashbody form .btn {
+  margin: 50px auto;
+  text-align: center;
+}
+.dashbody form .btn button {
+  background-color: #0eaaa6;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  color: white;
+  text-transform: capitalize;
+  cursor: pointer;
+  margin-bottom: 50px;
+  border: 0;
+}
+
+.dropdown {
+  cursor: pointer;
+  width: 100%;
+  position: relative;
+}
+.dropdown .select-box {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.159);
+  padding: 8.4px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dropdown .options {
+  width: 100%;
+  position: absolute;
+  z-index: 50;
+  bottom: -60px;
+  border: 1px solid #35717f6f;
+}
+.dropdown .options .option {
+  padding: 5px;
+  transition: 0.3s;
+}
+.dropdown .options .option:hover {
+  background-color: #eee;
+}
+
+.notify a i{
+  position: relative;
+
+}
+.notify i span{
+  position: absolute;
+  font-size: 10px;
+  top: -15px;
+  right: -10px;
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.notify a{
+  position: relative;
+}
+.notify .drop-down {
+  position: absolute;
+  bottom: -310px;
+  left: -250px;
+  min-width: 450px; /* Increased from 350px to 450px */
+  width: calc(fit-content + 30%); /* Increased from 20% to 30% */
+  max-width: fit-content;
+  padding: 5px;
+  height: 300px;
+  overflow: auto;
+  background-color: white;
+  box-shadow: 0px 0px 29px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.notify .drop-down button{
+  min-width: 90px;
+  max-height: 39px;
+  margin-left: 5px;
+  border-radius: 10px;
+}
+.notify .drop-down div{
+  border-bottom: solid 2px #eee;
+  transition: .6s;
+}
+.notify .drop-down div:hover{
+  background-color:#0eaaa6;
+  border-radius: 10px;
+  margin-left: 5px;
+  color: black;
+  
+}

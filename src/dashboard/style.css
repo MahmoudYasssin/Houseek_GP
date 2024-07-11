@@ -1,0 +1,48 @@
+.swiper {
+  width: 600px;
+  height: 100%;
+}
+.swiper .navigation {
+  background: #000;
+  color: #fff;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(17, 17, 17, 0.404);
+}
+
+.swiper-slide img {
+  width: 100%;
+  height: 100%;
+}
+.bar {
+  display: flex;
+  flex: 1;
+  gap: 50px;
+  padding-top: 100px;
+  margin-left: 250px;
+}
+
+.dashdosh {
+  width: 90%;
+  padding-top: 5%;
+  padding-left: 8%;
+  display: grid;
+  grid-template-rows: auto auto; /* Two rows with auto height */
+  grid-template-columns: 1fr 1fr; /* Two columns with equal width by default */
+  gap: 20px; /* Gap between grid items */
+
+  /* Media query for small screens */
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr; /* Single column for screens 768px and below */
+  }
+}
+
+.chart-item {
+  border-radius: 5%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  overflow: hidden; /* Ensure the border radius applies correctly */
+}

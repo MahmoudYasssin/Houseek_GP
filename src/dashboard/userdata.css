@@ -1,0 +1,136 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  * {
+    list-style: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .user-info{
+    display: flex;
+    width: 1000px;
+    height: 400px;
+  }
+  .owner{
+    width: 500px !important;
+    height: 400px;
+  }
+  .maxi{
+    min-width: 1000px !important;
+    height: 500px !important;
+    position: relative !important;
+  }
+  .alias-gallery{
+    min-width:600px;
+    max-width:600px;
+    height: 100%;
+    position: relative;
+  }
+  .gallery{
+    display: flex;
+    align-items: center;
+    /* gap: 50px; */
+    overflow: hidden;
+    overflow-x: scroll;
+    background-color: black;
+    min-width:100%;
+    max-width:100%;
+    height: 100%;
+  }
+  .gallery .holdimg{
+    min-width:  100%;
+    min-height: 100%;
+    position: relative;
+  }
+  .maxi .gallery .holdimg img{
+    height: 100% !important;
+  }
+  .gallery img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 95%;
+    object-fit: cover;
+  }
+  
+  .alias-gallery .maximize{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .maxi .arrow{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .alias-gallery span,.maxi span {
+    z-index: 5;
+    position: absolute;
+    top: calc(60% - 45px);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: 0.2s;
+    cursor: pointer;
+    z-index: 1000;
+  }
+  
+    .alias-gallery .right ,.maxi .right{
+    right: 10px;
+  }
+    .alias-gallery .left,.maxi .left {
+    left: 10px;
+  }
+  .maxi .left {
+    left: 10px !important;
+    z-index: 100 !important;
+  }
+  .maxi .right{
+    right: 10px !important;
+    z-index: 100;
+  }
+  .alias-gallery .left:hover,
+  .alias-gallery .right:hover {
+  transform: scale(1.5);
+  background-color: #eeeeee44;
+}
+  .info{
+    background-color: white;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+  .info .paragraphs{
+    flex-grow: 1;
+  }
+  .home-info{
+    display: flex;
+    gap: 20px;
+  }
+  .home-info .home{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .overflow{
+    top: -20px;
+  }
